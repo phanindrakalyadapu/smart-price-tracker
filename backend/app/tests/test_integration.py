@@ -10,8 +10,7 @@ def test_end_to_end(client):
     user_payload = {
         "first_name": "xyz",
         "last_name": "abc",
-        "email": "abc@example.com",
-        "password": "abc@123"
+        "email": "abc@example.com"
     }
 
     user_response = client.post("/users/", json=user_payload)
