@@ -5,7 +5,7 @@ from contextlib import asynccontextmanager
 from datetime import datetime
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import Base, engine
-from app.routers import users, products, wishlist, price_history
+from app.routers import users, products, wishlist, price_history, health
 from app.services.firecrawl_test import firecrawl_test
 from app.services.pure_ai_scraper import pure_ai_scraper
 from app.services.schedular import start_scheduler, shutdown_scheduler
@@ -53,6 +53,7 @@ app.router.redirect_slashes = False
 Base.metadata.create_all(bind=engine)
 
 # ✅ Include all routers
+app.include_router(health.router)
 app.include_router(users.router)
 app.include_router(products.router)
 app.include_router(wishlist.router)
