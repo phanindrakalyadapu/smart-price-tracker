@@ -15,14 +15,15 @@ except Exception:
 # --- Detect testing mode ---
 TESTING = os.getenv("TESTING", "false").lower() == "true"
 
-if TESTING:
+is_render = os.getenv("RENDER") == "true"
+
+if is_render:
     # ✅ SQLite for unit tests
-    DATABASE_URL = "sqlite:///:memory:"
-    engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+    DATABASE_URL = os.getenv("DATABASE_URL")
 else:
     # ✅ Oracle for local/production
     DATABASE_URL = (
-        "oracle+oracledb://price_tracker:Phani12@localhost:1521/?service_name=XEPDB1"
+        "postgresql://smart_price_tracker_user:HT7GULfv4A8orIcLSJlHf3c0cIiA4OGK@dpg-d40jn263jp1c73ehkbg0-a.oregon-postgres.render.com/smart_price_tracker"
     )
     engine = create_engine(DATABASE_URL, echo=True, future=True)
 
