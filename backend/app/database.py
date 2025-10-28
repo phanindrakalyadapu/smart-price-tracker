@@ -12,9 +12,6 @@ except Exception:
     # This avoids "cannot initialize multiple times" errors when reloading
     pass
 
-# --- Detect testing mode ---
-TESTING = os.getenv("TESTING", "false").lower() == "true"
-
 is_render = os.getenv("RENDER") == "true"
 
 if is_render:
@@ -25,7 +22,7 @@ else:
     DATABASE_URL = (
         "postgresql://smart_price_tracker_user:HT7GULfv4A8orIcLSJlHf3c0cIiA4OGK@dpg-d40jn263jp1c73ehkbg0-a.oregon-postgres.render.com/smart_price_tracker"
     )
-    engine = create_engine(DATABASE_URL, echo=True, future=True)
+engine = create_engine(DATABASE_URL, echo=True, future=True)
 
 # --- Session setup ---
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
