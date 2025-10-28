@@ -1,0 +1,16 @@
+# Global ignores
+.DS_Store
+*.log
+*.pyc
+
+# Backend
+backend/venv/
+backend/__pycache__/
+backend/.env
+backend/.idea/
+
+# Frontend
+frontend/node_modules/
+frontend/build/
+frontend/.env
+frontend/.cache/
