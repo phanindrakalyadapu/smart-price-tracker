@@ -70,6 +70,18 @@ app.include_router(dashboard.router)
 def home():
     return {"msg": "Smart Price Tracker API is running 🚀"}
 
+#for db health check
+@app.get("/db-check")
+def db_check():
+    from app.database import engine
+    with engine.connect() as conn:
+        result = conn.execute("SELECT sysdate FROM dual")
+        return {
+            "ok": True,
+            "time":[str(r[0]) for r in result]
+        }
+
+        
 # Add this to your main.py for testing
 @app.post("/debug-scrape")
 async def debug_scrape(url: str):
